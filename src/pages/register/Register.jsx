@@ -22,7 +22,7 @@ const Register = () => {
                                    name="firstName"
                                    placeholder="first name"
                                    required
-                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
                               />
                          </div>
 
@@ -35,7 +35,7 @@ const Register = () => {
                                    name="lastName"
                                    placeholder="last name"
                                    required
-                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
                               />
                          </div>
 
@@ -48,7 +48,7 @@ const Register = () => {
                                    name="email"
                                    placeholder="email"
                                    required
-                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
                               />
                          </div>
 
@@ -61,7 +61,7 @@ const Register = () => {
                                    name="password"
                                    placeholder="password"
                                    required
-                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
                               />
                          </div>
 
@@ -74,7 +74,7 @@ const Register = () => {
                                    name="confirmPassword"
                                    placeholder="confirm password"
                                    required
-                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
                               />
                          </div>
 
@@ -93,10 +93,13 @@ const Register = () => {
                          </Link>
                     </div>
 
-                    <div className="flex items-center justify-center space-x-2 mt-4">
-                         <div className="border-b w-1/4"></div>
-                         <div className="text-gray-500">Or</div>
-                         <div className="border-b w-1/4"></div>
+                    <div className="relative">
+                         <div className="absolute inset-0 flex items-center">
+                              <div className="w-full border-t border-gray-300"></div>
+                         </div>
+                         <div className="relative flex justify-center text-sm">
+                              <span className="px-2 bg-white text-gray-500">Or</span>
+                         </div>
                     </div>
 
                     <div className="grid gap-4 mt-6">

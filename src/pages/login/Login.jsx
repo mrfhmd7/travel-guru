@@ -9,7 +9,7 @@ const Login = () => {
      };
 
      return (
-          <div className="flex justify-center items-center h-screen bg-gray-100">
+          <div className="flex justify-center items-center pt-10 pb-10 bg-gray-100">
                <div className="w-full max-w-md p-8 space-y-8 bg-white shadow-lg rounded-lg">
                     <div className="text-left">
                          <h2 className="text-2xl font-semibold">Login</h2>
@@ -21,7 +21,7 @@ const Login = () => {
                                    type="email"
                                    placeholder="email"
                                    name="email"
-                                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-yellow-500"
+                                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-yellow-300"
                                    required
                               />
                          </div>
@@ -31,7 +31,7 @@ const Login = () => {
                                    type="password"
                                    placeholder="password"
                                    name="password"
-                                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-yellow-500"
+                                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-yellow-300"
                                    required
                               />
                          </div>
@@ -52,7 +52,7 @@ const Login = () => {
                          <div>
                               <button
                                    type="submit"
-                                   className="w-full px-4 py-2 text-white bg-yellow-400 rounded-lg hover:bg-yellow-500 focus:outline-none focus:ring"
+                                   className="w-full px-4 py-2 hover:text-white border border-yellow-400 rounded-lg hover:bg-yellow-500"
                               >
                                    Login
                               </button>
@@ -64,7 +64,7 @@ const Login = () => {
                               Create an account
                          </a>
                     </div>
-                    <div className="relative mt-6">
+                    <div className="relative">
                          <div className="absolute inset-0 flex items-center">
                               <div className="w-full border-t border-gray-300"></div>
                          </div>
@@ -72,7 +72,7 @@ const Login = () => {
                               <span className="px-2 bg-white text-gray-500">Or</span>
                          </div>
                     </div>
-                    <div className="grid gap-4 mt-6">
+                    <div className="grid gap-4">
                          <button className="flex items-center justify-center px-4 py-2 text-sm font-medium border border-blue-400 text-blue-500 rounded-full hover:bg-blue-500 hover:text-white">
                               <FaFacebookF className="mr-2" /> Continue with Facebook
                          </button>
