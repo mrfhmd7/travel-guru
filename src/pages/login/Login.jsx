@@ -2,13 +2,10 @@ import { useState } from 'react';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
 
 const Login = () => {
-     const [email, setEmail] = useState('');
-     const [password, setPassword] = useState('');
      const [rememberMe, setRememberMe] = useState(false);
 
      const handleLogin = (e) => {
           e.preventDefault();
-          // Handle login logic
      };
 
      return (
@@ -24,8 +21,6 @@ const Login = () => {
                                    type="email"
                                    placeholder="email"
                                    name="email"
-                                   value={email}
-                                   onChange={(e) => setEmail(e.target.value)}
                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-yellow-500"
                                    required
                               />
@@ -36,8 +31,6 @@ const Login = () => {
                                    type="password"
                                    placeholder="password"
                                    name="password"
-                                   value={password}
-                                   onChange={(e) => setPassword(e.target.value)}
                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-yellow-500"
                                    required
                               />
@@ -67,7 +60,7 @@ const Login = () => {
                     </form>
                     <div className="text-center text-sm text-gray-600">
                          Don’t have an account?{' '}
-                         <a href="#" className="text-yellow-500 hover:underline">
+                         <a href="registration" className="text-yellow-500 hover:underline">
                               Create an account
                          </a>
                     </div>
