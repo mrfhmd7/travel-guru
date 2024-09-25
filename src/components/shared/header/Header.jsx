@@ -67,6 +67,12 @@ const Header = () => {
                          <Link to="/contact" className="text-gray-700">
                               Contact
                          </Link>
+                         <Link to="/login" className="text-gray-700">
+                              Login
+                         </Link>
+                         <Link to="/registration" className="text-gray-700">
+                              Register
+                         </Link>
                     </nav>
                </div>
 
@@ -135,6 +141,17 @@ const Header = () => {
                               className="block text-gray-700 p-2"
                          >
                               Contact
+                         </Link>
+                         <Link
+                              to="/login"
+                              onClick={toggleMenu}
+                              className="block text-gray-700 p-2">
+                              Login
+                         </Link>
+                         <Link to="/registration"
+                              onClick={toggleMenu}
+                              className="block text-gray-700 p-2">
+                              Register
                          </Link>
                     </nav>
                </div>
