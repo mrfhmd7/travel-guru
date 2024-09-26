@@ -1,11 +1,26 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const Login = () => {
      const [rememberMe, setRememberMe] = useState(false);
+     const { signInWithGoogle, } = useContext(AuthContext);
 
      const handleLogin = (e) => {
           e.preventDefault();
+     };
+
+     const handleGoogleLogin = () => {
+          signInWithGoogle()
+               .then(result => {
+                    const loggedUser = result.user;
+                    console.log(loggedUser);
+                    // toast.success('Signed in with Google successfully!');
+               })
+               .catch(error => {
+                    console.log(error);
+                    // toast.error('Error signing in with Google');
+               })
      };
 
      return (
@@ -76,7 +91,9 @@ const Login = () => {
                          <button className="flex items-center justify-center px-4 py-2 text-sm font-medium border border-blue-400 text-blue-500 rounded-full hover:bg-blue-500 hover:text-white">
                               <FaFacebookF className="mr-2" /> Continue with Facebook
                          </button>
-                         <button className="flex items-center justify-center px-4 py-2 text-sm font-medium border border-red-400 text-red-400 hover:text-white rounded-full hover:bg-red-500">
+                         <button
+                              onClick={handleGoogleLogin}
+                              className="flex items-center justify-center px-4 py-2 text-sm font-medium border border-red-400 text-red-400 hover:text-white rounded-full hover:bg-red-500">
                               <FaGoogle className="mr-2" /> Continue with Google
                          </button>
                     </div>
