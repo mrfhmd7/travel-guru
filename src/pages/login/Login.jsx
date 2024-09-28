@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import { FaFacebookF, FaGoogle } from 'react-icons/fa';
+import { FaEye, FaEyeSlash, FaFacebookF, FaGoogle } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -90,15 +90,20 @@ const Login = () => {
                                    required
                               />
                          </div>
-                         <div>
+                         <div className="relative">
                               <label className="block text-sm font-medium text-gray-700 text-left">Password</label>
                               <input
-                                   type="password"
+                                   type={show ? "text" : "password"}
                                    placeholder="password"
                                    name="password"
                                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-yellow-300"
                                    required
                               />
+                              <span
+                                   className="absolute top-[25px] bottom-0 right-3 flex items-center cursor-pointer text-gray-500"
+                                   onClick={() => setShow(!show)}>
+                                   {show ? <FaEyeSlash /> : <FaEye />}
+                              </span>
                          </div>
                          <div className="flex items-center justify-between">
                               <label className="flex items-center">
