@@ -2,26 +2,96 @@ import React, { useContext } from "react";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { sendEmailVerification, updateProfile } from 'firebase/auth';
 
 const Register = () => {
 
-     const { signInWithGoogle } = useContext(AuthContext);
+     const { signInWithGoogle, createUser } = useContext(AuthContext);
 
-     const handleSubmit = (e) => {
-          e.preventDefault();
+     const handleSubmit = event => {
+          event.preventDefault();
+
+          const form = event.target;
+          const name = form.name.value;
+          const email = form.email.value;
+          const password = form.password.value;
+          const confirmPassword = form.confirmPassword.value;
+          console.log(name, email, password, confirmPassword);
+
+          if (password !== confirmPassword) {
+               toast.error('Passwords do not match');
+               return;
+          }
+          else if (!/[A-Za-z]/.test(password)) {
+               toast.error('Password must contain at least one uppercase or lowercase letter.');
+               return;
+          }
+          else if (!/\d/.test(password)) {
+               toast.error('Password must contain at least one number.');
+               return;
+          }
+          else if (!/[@$!%*?&]/.test(password)) {
+               toast.error('Password must contain at least one special character.');
+               return;
+          }
+          else if (/\s/.test(password)) {
+               toast.error('Password must not contain spaces.');
+               return;
+          }
+          else if (password.length < 8 || password.length > 16) {
+               toast.error('Password length should be between 8 and 16 characters.');
+               return;
+          }
+
+          createUser(email, password)
+               .then(result => {
+                    const loggedUser = result.user;
+                    // console.log(loggedUser);
+                    toast.success('Account created successfully');
+                    form.reset();
+                    verifyEmail(loggedUser);
+                    updateUserData(loggedUser, name)
+               })
+               .catch(error => {
+                    console.log(error);
+                    toast.error('Error creating account');
+               })
+     };
+
+     const updateUserData = (user, name) => {
+          updateProfile(user, {
+               displayName: name,
+          })
+               .then(() => {
+                    console.log('User name Updated');
+               })
+               .catch(error => {
+                    console.log(error);
+               }
+               )
+     };
+
+     const verifyEmail = user => {
+          sendEmailVerification(user)
+               .then((result) => {
+                    console.log(result);
+                    toast.warn("Please varify your email");
+               })
      };
 
      const handleGoogleSignUp = () => {
           signInWithGoogle()
-              .then(result => {
-                  const loggedUser = result.user;
-                  console.log("Google Sign-In Successful:", loggedUser);
-              })
-              .catch(error => {
-                  console.error("Google Sign-In Error:", error.message); // Log the specific error message
-              });
-      };
-      
+               .then(result => {
+                    const loggedUser = result.user;
+                    console.log("Google Sign-In Successful:", loggedUser);
+               })
+               .catch(error => {
+                    console.error("Google Sign-In Error:", error.message); // Log the specific error message
+               });
+     };
+
 
      return (
           <div className="flex justify-center items-center pt-8 pb-8 bg-gray-100">
@@ -30,25 +100,12 @@ const Register = () => {
                     <form className="space-y-4 text-left" onSubmit={handleSubmit}>
                          <div>
                               <label className="block text-sm font-medium text-gray-700">
-                                   First Name
+                                   Name
                               </label>
                               <input
                                    type="text"
-                                   name="firstName"
-                                   placeholder="first name"
-                                   required
-                                   className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
-                              />
-                         </div>
-
-                         <div>
-                              <label className="block text-sm font-medium text-gray-700">
-                                   Last Name
-                              </label>
-                              <input
-                                   type="text"
-                                   name="lastName"
-                                   placeholder="last name"
+                                   name="name"
+                                   placeholder="name"
                                    required
                                    className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-yellow-300"
                               />
@@ -95,7 +152,7 @@ const Register = () => {
 
                          <button
                               type="submit"
-                              className="w-full bg-yellow-500 text-white py-2 px-4 rounded-md hover:bg-yellow-600"
+                              className="w-full py-2 px-4 hover:text-white border border-yellow-400 rounded-lg hover:bg-yellow-500"
                          >
                               Create an account
                          </button>
@@ -107,6 +164,8 @@ const Register = () => {
                               Login
                          </Link>
                     </div>
+
+                    <ToastContainer />
 
                     <div className="relative">
                          <div className="absolute inset-0 flex items-center">
