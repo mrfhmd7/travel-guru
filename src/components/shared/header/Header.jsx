@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import travelLogo from "../../../assets/logo.svg";
 import travelLogoB from "../../../assets/logo-b.svg";
+import { AuthContext } from "../../../contexts/AuthProvider";
 
 const Header = () => {
+     const { user, logOut } = useContext(AuthContext);
      const [isOpen, setIsOpen] = useState(false);
      const [searchTerm, setSearchTerm] = useState("");
 
@@ -13,6 +15,15 @@ const Header = () => {
 
      const handleSearch = (event) => {
           setSearchTerm(event.target.value);
+     };
+
+     const handleLogout = () => {
+          logOut()
+               .then(() => { })
+               .catch((error) => {
+                    console.error(error);
+
+               })
      };
 
      return (
@@ -54,7 +65,7 @@ const Header = () => {
                               ></path>
                          </svg>
                     </button>
-                    <nav className="hidden lg:flex space-x-8">
+                    <nav className="hidden lg:flex space-x-8 items-center">
                          <Link to="/news" className="text-gray-700">
                               News
                          </Link>
@@ -67,12 +78,27 @@ const Header = () => {
                          <Link to="/contact" className="text-gray-700">
                               Contact
                          </Link>
-                         <Link to="/login" className="text-gray-700">
-                              Login
-                         </Link>
-                         <Link to="/registration" className="text-gray-700">
-                              Register
-                         </Link>
+                         {user ?
+                              <>
+                                   <span className='text-white font-semibold pr-3'>
+                                        {user.displayName ? user.displayName : user.email}
+                                   </span>
+                                   <button onClick={handleLogout} className="bg-yellow-400 font-semibold text-gray-700 hover:text-white px-4 py-2 rounded hover:bg-yellow-500">
+                                        Log Out
+                                   </button>
+                              </>
+                              :
+                              <>
+                                   <Link to="/registration" className="text-gray-700">
+                                        Register
+                                   </Link>
+                                   <Link to='/login'>
+                                        <button className="bg-yellow-400 font-semibold text-gray-700 hover:text-white px-4 py-2 rounded hover:bg-yellow-500">
+                                             Login
+                                        </button>
+                                   </Link>
+                              </>
+                         }
                     </nav>
                </div>
 
